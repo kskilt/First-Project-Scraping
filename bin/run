@@ -1,0 +1,10 @@
+#!/usr/bin/env ruby
+
+require "open-uri"
+require "pry"
+require "nokogiri"
+require "require_all"
+
+require_all "./lib"
+
+Scraper.scrape_index_page("https://listfortress.com/")
