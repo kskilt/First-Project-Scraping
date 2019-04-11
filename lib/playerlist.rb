@@ -16,7 +16,9 @@ class PlayerList
   end
 
   def squadify(squadlist) #This is a method to clean up raw data
+    if squadlist != nil
     squadlist.strip.split("\n").map{|squad| squad.strip}
+    end
   end
   # binding.pry
 end

@@ -24,17 +24,15 @@ class Scraper
     initial = Nokogiri::HTML(open(url))
     table = initial.css("table")
     stuff = []
-    # e = index_page.css("tbody").css("tr").first.
     details = initial.css("table").css("tr").each do |card|
       card.css("td").each do |detail|
         stuff << detail.text
       end
-        rank = stuff[0]
-        player_name = stuff[2]
-        score = stuff[3]
-        squadlist = stuff[6]
-        PlayerList.new(rank, player_name, score, squadlist)
+      if stuff[0] != nil
+        PlayerList.new(stuff[0], stuff[2], stuff[3], stuff[6])
         stuff = []
+      else stuff =[]
+      end
     end
     binding.pry
   end
