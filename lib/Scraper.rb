@@ -30,9 +30,9 @@ class Scraper
         stuff << detail.text
       end
         rank = stuff[0]
-        player_name = stuff[1]
-        score = stuff[4]
-        squadlist = stuff[7]
+        player_name = stuff[2]
+        score = stuff[3]
+        squadlist = stuff[6]
         SquadList.new(rank, player_name, score, squadlist)
         stuff = []
     end
