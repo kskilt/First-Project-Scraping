@@ -8,4 +8,4 @@ require "require_all"
 require_all "./lib"
 
 Scraper.tournament_scraper("https://listfortress.com/")
-Scraper.squad_scraper("https://listfortress.com/tournament/539")
+Scraper.squad_scraper("https://listfortress.com/tournaments/539")

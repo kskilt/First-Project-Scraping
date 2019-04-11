@@ -21,11 +21,11 @@ class Scraper
   end
 
     def self.squad_scraper(url)
-    index_page = Nokogiri::HTML(open(url))
-    body = index_page.css("tbody")
+    initial = Nokogiri::HTML(open(url))
+    table = initial.css("table")
     stuff = []
-    e = index_page.css("tbody").css("tr").first.css("td").first.css("a").text
-    details = index_page.css("tbody").css("tr").each do |card|
+    # e = index_page.css("tbody").css("tr").first.
+    details = initial.css("table").css("tr").each do |card|
       card.css("td").each do |detail|
         stuff << detail.text
       end
@@ -33,8 +33,9 @@ class Scraper
         player_name = stuff[1]
         score = stuff[4]
         squadlist = stuff[7]
-        Squadlist.new(rank, player_name, score, squadlist)
+        SquadList.new(rank, player_name, score, squadlist)
         stuff = []
     end
+    binding.pry
   end
 end
