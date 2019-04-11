@@ -7,4 +7,4 @@ require "require_all"
 
 require_all "./lib"
 
-Scraper.scrape_index_page("https://listfortress.com/")
+Scraper.tournament_scraper("https://listfortress.com/")
