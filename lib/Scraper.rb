@@ -20,7 +20,7 @@ class Scraper
     end
   end
 
-    def self.squad_scraper(url)
+    def self.player_list_scraper(url)
     initial = Nokogiri::HTML(open(url))
     table = initial.css("table")
     stuff = []
@@ -33,7 +33,7 @@ class Scraper
         player_name = stuff[2]
         score = stuff[3]
         squadlist = stuff[6]
-        SquadList.new(rank, player_name, score, squadlist)
+        PlayerList.new(rank, player_name, score, squadlist)
         stuff = []
     end
     binding.pry

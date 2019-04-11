@@ -1,4 +1,4 @@
-class SquadList
+class PlayerList
   attr_reader :rank, :player_name, :score, :squadlist
   @@all = []
 
@@ -7,11 +7,16 @@ class SquadList
     @rank = rank
     @player_name = player_name
     @score = score
-    @squadlist = squadlist
+    @squadlist = squadify(squadlist)
     @@all << self
   end
 
   def self.all
     @@all
   end
+
+  def squadify(squadlist) #This is a method to clean up raw data
+    squadlist.strip.split("\n").map{|squad| squad.strip}
+  end
+  # binding.pry
 end
