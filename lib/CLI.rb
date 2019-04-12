@@ -19,7 +19,7 @@ class CLI
   def list
     Scraper.tournament_scraper("https://listfortress.com/")
     Tournament.all.each do |tournament|
-      puts "#{tournament.event}".colorize(:light_blue)
+      puts "#{tournament.id}: #{tournament.event}".colorize(:light_blue)
       puts "---------------------".colorize(:blue)
     end
   end
