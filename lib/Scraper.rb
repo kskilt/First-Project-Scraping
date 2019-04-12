@@ -21,15 +21,15 @@ class Scraper
     end
   end
 
-  def self.player_scraper(tournament)
-    Nokogiri::HTML(open(tournament.url)).css("table").css("tr").each do |players|
-      players.css("td").each do |squadlist|
-      details = []
-      details << squadlist.text
-      end
-      if !details[0].nil? # The header was being turned into a class with nil values, this checks value of playing ranking which filters out header and duplicates events with no value
-        Player.new(details[0], details[2], details[3], details[6]
-      end
-    end
-  end
+  # # def self.player_scraper(tournament)
+  # #   Nokogiri::HTML(open(tournament.tournament)).css("table").css("tr").each do |players|
+  # #     players.css("td").each do |squadlist|
+  # #     details = []
+  # #     details << squadlist.text
+  # #     end
+  # #     if !details[0].nil? # The header was being turned into a class with nil values, this checks value of playing ranking which filters out header and duplicates events with no value
+  # #       Player.new(details[0], details[2], details[3], details[6])
+  # #     end
+  # #   end
+  # end
 end
