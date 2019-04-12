@@ -1,3 +1,5 @@
+# frozen_string_literal: true.
+
 #!/usr/bin/env ruby
 
 require "open-uri"
@@ -7,5 +9,4 @@ require "require_all"
 
 require_all "./lib"
 
-Scraper.tournament_scraper("https://listfortress.com/")
-Scraper.player_list_scraper("https://listfortress.com/tournaments/539")
+CLI.new.call
