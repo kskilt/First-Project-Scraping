@@ -22,5 +22,6 @@ class Player
       squadlist.strip.split("\n").map{|squad| squad.strip}
     end
   end
+
   # binding.pry
 end

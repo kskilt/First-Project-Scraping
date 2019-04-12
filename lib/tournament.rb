@@ -1,7 +1,7 @@
 # frozen_string_literal: true.
 
 class Tournament
-  attr_reader :event, :location, :date, :format, :player_count, :tournament_link, :id
+  attr_reader :event, :location, :date, :format, :player_count, :link, :id
   @@all = []
   @@id = 1
 
@@ -11,14 +11,10 @@ class Tournament
     @date = date
     @format = format
     @player_count = player_count
-    @tournament_link = second_layer_url(link)
     @id = @@id
+    @link = link
     @@all << self
     @@id += 1
-  end
-
-  def second_layer_url(link)
-    "https://listfortress.com/#{link}"
   end
 
   def self.all
@@ -26,6 +22,12 @@ class Tournament
   end
 
   def self.tournament_link
-    @tournament_link
+    @link
+  end
+
+    def self.find_by_id(id)
+    all.find do |tournament|
+      tournament.id == id.to_i
+    end
   end
 end
