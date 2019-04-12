@@ -3,37 +3,29 @@
 class Scraper
   def self.tournament_scraper(url)
     index_page = Nokogiri::HTML(open(url))
-    body = index_page.css("tbody")
-    stuff = []
-    e = index_page.css("tbody").css("tr").first.css("td").first.css("a").text
-    details = index_page.css("tbody").css("tr").each do |card|
-      card.css("td").each do |detail|
-        stuff << detail.text
+    event_details = []
+    link = index_page.css("tbody").css("tr").first.css("td").first.css("a").first["href"]
+    details = index_page.css("tbody").css("tr").each do |tournaments|
+      tournaments.css("td").each do |detail|
+        event_details << detail.text
       end
-        event = stuff[0]
-        location = stuff[1]
-        date = stuff[4]
-        format = stuff[5]
-        player_count = stuff[7].strip.to_i
-        Tournament.new(event,location,date,format,player_count)
-        stuff = []
+        Tournament.new(event_details[0],event_details[1],event_details[4],event_details[5],event_details[7].strip.to_i, link)
+        event_details = []
     end
   end
 
     def self.player_list_scraper(url)
-    initial = Nokogiri::HTML(open(url))
-    table = initial.css("table")
-    stuff = []
-    details = initial.css("table").css("tr").each do |card|
-      card.css("td").each do |detail|
-        stuff << detail.text
+    details = []
+    Nokogiri::HTML(open(url)).css("table").css("tr").each do |players|
+      players.css("td").each do |squadlist|
+        details << squadlist.text
       end
-      if stuff[0] != nil
-        PlayerList.new(stuff[0], stuff[2], stuff[3], stuff[6])
-        stuff = []
-      else stuff =[]
+      if details[0] != nil #the header was being turned into a class with nil values, this checks value of playing ranking which filters out header and duplicates events with no value
+        PlayerList.new(details[0], details[2], details[3], details[6])
+        details = []
+      else details =[] #this resets the array to accept the next tournament
       end
     end
-    binding.pry
+
   end
 end
