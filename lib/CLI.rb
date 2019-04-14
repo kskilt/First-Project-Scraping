@@ -36,7 +36,7 @@ class CLI
       @tournament = tournament_by_id(input)
       @tournament
       display_players
-      command_prompt
+      # command_prompt
     end
   end
 
@@ -46,42 +46,17 @@ class CLI
 
   def display_players
     Scraper.player_scraper(tournament)
-    Player.all.each do |player| #Tournament.players.each
+    Player.all.each do |player|
+      unless player == nil
       puts "#{player.name} placed #{player.rank} with a score of #{player.score} running this squad:".colorize(:green)
       player.squadlist.each { |pilot|
-        if player.squadlist !=nil
           puts "#{pilot}".colorize(:light_blue)
           puts "---------------------".colorize(:blue)
         else puts "<This infomation is not available>".colorize(:light_blue)
           puts"---------------------".colorize(:blue)
         end}
     end
-    command_prompt
-  end
-
-  def command_prompt
-    puts "Enter 'return' to return to the menu.".colorize(:red)
-    user_command
-  end
-
-  def user_command
-    command = gets.strip.downcase
-    case command
-    when 'return'
-      return_to_menu
-    when 'goodbye'
-      goodbye
-    else
-      invalid
-    end
-  end
-
-  def return_to_menu
-    menu
-  end
-
-  def invalid
-    puts "Please enter a valid command.".colorize(:red)
+    goodbye
   end
 
   def goodbye

@@ -10,7 +10,7 @@ class Player
     @name = name
     @score = score
     @tournament = tournament
-    @squadlist = squadify(squadlist)
+    @squadlist = formatting(squadlist)
     @@all << self
   end
 
@@ -18,8 +18,8 @@ class Player
     @@all
   end
 
-  def squadify(squadlist) #This is a method to clean up raw data
-    if squadlist != nil
+  def formatting(squadlist) # This is a method to clean up raw data
+    unless squadlist == nil
       squadlist.strip.split("\n").map{|squad| squad.strip}
     end
   end
