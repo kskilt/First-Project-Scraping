@@ -17,7 +17,7 @@ class CLI
   def menu
     puts "Here are the latest X-Wing tournaments around the world:".colorize(:red)
     list
-    puts "Please enter a tournment number to see the players in that specific tournament.".colorize(:red)
+    puts "Please enter a tournment number to see the players in that specific tournament. You may also type 'goodbye' to exit the session".colorize(:red)
     input = gets.strip.downcase
     navigate_tournament(input)
   end
@@ -50,17 +50,17 @@ class CLI
       puts "#{player.name} placed #{player.rank} with a score of #{player.score} running this squad:".colorize(:green)
       player.squadlist.each { |pilot|
         if player.squadlist !=nil
-        puts "#{pilot}".colorize(:light_blue)
-        puts "---------------------".colorize(:blue)
+          puts "#{pilot}".colorize(:light_blue)
+          puts "---------------------".colorize(:blue)
         else puts "<This infomation is not available>".colorize(:light_blue)
-             puts"---------------------".colorize(:blue)
+          puts"---------------------".colorize(:blue)
         end}
     end
     command_prompt
   end
 
   def command_prompt
-    puts "Enter 'return' to return to the menu or 'goodbye' to end your session.".colorize(:red)
+    puts "Enter 'return' to return to the menu.".colorize(:red)
     user_command
   end
 
@@ -76,16 +76,16 @@ class CLI
     end
   end
 
-  def goodbye
-    puts "Thank you for visiting. Goodbye!".colorize(:red)
-  end
-
   def return_to_menu
     menu
   end
 
   def invalid
     puts "Please enter a valid command.".colorize(:red)
+  end
+
+  def goodbye
+    puts "Thank you for visiting. Goodbye!".colorize(:red)
   end
 end
 
