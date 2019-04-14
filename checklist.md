@@ -1,7 +1,7 @@
 Object Oriented Ruby CLI Scraping Project checklist
 CLI:
 
- []Provides an interface with the application
+ [x]Provides an interface with the application
  [x]Pulls data from an external source
  [x]Pulls more data a 2nd time after user makes a selection
  [x]Implements at least one list view and one detail view. Data provided must go at least one level deep.
