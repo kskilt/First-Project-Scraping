@@ -4,12 +4,18 @@
 class CLI
   attr_accessor :input, :tournament
   def call
+    greeting
+    menu
+  end
+
+  def greeting
     puts "Welcome to X-Wing Tournament Results!".colorize(:red)
+  end
+
+  def menu
     puts "Here are the latest X-Wing tournaments around the world:".colorize(:red)
-
     list
-
-     puts "Please enter a tournment number to see the players in that specific tournament.".colorize(:red)
+    puts "Please enter a tournment number to see the players in that specific tournament.".colorize(:red)
     input = gets.strip.downcase
     @tournament = tournament_by_id(input)
     @tournament
@@ -26,6 +32,17 @@ class CLI
     end
   end
 
+  def validate_tournament(input)
+    if input.is_a Integer
+      @tournament = tournament_by_id(input)
+      @tournament
+    elsif input == "exit"
+      goodbye
+    else
+      puts "That was not a validate option. Please type the corresponding number with the tournament you would like to see"
+      list
+    end
+  end
   def tournament_by_id(input)
     Tournament.find_by_id(input)
   end
@@ -42,6 +59,10 @@ class CLI
              puts"---------------------".colorize(:blue)
         end}
     end
+  end
+
+  def goodbye
+    "Thank you for visiting. Goodbye!"
   end
 # should make recursive so directs user back to the main menu or to exit
 
