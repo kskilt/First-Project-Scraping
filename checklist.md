@@ -18,3 +18,9 @@ README.md contains:
 
  []A short description
  []Installation & execution instructions
+
+Bugs and Ideas
+[] recursive interface that goes back to main list or exits as directed
+  [] return button for list
+  [] exit option at any point
+[] Squad lists not inputted online are giving blank data in CLI
