@@ -1,4 +1,4 @@
-# frozen_string_literal: true.
+# frozen_string_literal: true
 
 class Player
   attr_reader :rank, :name, :score, :squadlist, :tournament
@@ -18,10 +18,9 @@ class Player
     @@all
   end
 
-  def formatting(squadlist) # This is a method to clean up raw data
-    unless squadlist == nil
-      squadlist.strip.split("\n").map{|squad| squad.strip}
+  def formatting(squadlist)
+    unless squadlist.nil?
+      squadlist.strip.split("\n").map { |squad| squad.strip }
     end
   end
-
 end

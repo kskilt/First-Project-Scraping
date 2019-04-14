@@ -1,4 +1,4 @@
-# frozen_string_literal: true.
+# frozen_string_literal: true
 
 class Tournament
   attr_reader :event, :player_count, :link, :id
@@ -27,8 +27,4 @@ class Tournament
       tournament.id == id.to_i
     end
   end
-
 end
-# needs to look through and grab the players in this specific tournament, so that in the display player, itll only grab that tournament CLI Ln 35
-
- # Google ruby named parameters

@@ -1,6 +1,5 @@
-# frozen_string_literal: true.
+# frozen_string_literal: true
 
-# Handles talking to user, with puts and gets. Does not scrape.
 class CLI
   attr_accessor :input, :tournament
 
@@ -17,12 +16,13 @@ class CLI
   def menu
     puts "Here are the latest X-Wing tournaments around the world:".colorize(:red)
     list
-    puts "Please enter a tournment number to see the players in that specific tournament. You may also type 'goodbye' to exit the session".colorize(:red)
+    puts "Please enter a tournment number to see a specific tournament.".colorize(:red)
+    puts " You may also type 'goodbye' to exit the session".colorize(:red)
     input = gets.strip.downcase
     navigate_tournament(input)
   end
 
-   def list
+  def list
     Tournament.all.each do |tourny|
       puts "#{tourny.id}: #{tourny.event} with #{tourny.player_count} players".colorize(:light_blue)
       puts "---------------------".colorize(:blue)
@@ -34,9 +34,8 @@ class CLI
       goodbye
     else
       @tournament = tournament_by_id(input)
-      @tournament
+      tournament
       display_players
-      # command_prompt
     end
   end
 
@@ -47,14 +46,14 @@ class CLI
   def display_players
     Scraper.player_scraper(tournament)
     Player.all.each do |player|
-      unless player == nil
-      puts "#{player.name} placed #{player.rank} with a score of #{player.score} running this squad:".colorize(:green)
-      player.squadlist.each { |pilot|
-          puts "#{pilot}".colorize(:light_blue)
-          puts "---------------------".colorize(:blue)
-        else puts "<This infomation is not available>".colorize(:light_blue)
-          puts"---------------------".colorize(:blue)
-        end}
+      unless player.nil?
+      puts "#{player.name} placed #{player.rank} with a score of #{player.score}".colorize(:green)
+      puts "running this squad:".colorize(:green)
+      player.squadlist.each do |pilot|
+        puts pilot.to_s.colorize(:light_blue)
+        puts "---------------------".colorize(:blue)
+      end
+      end
     end
     goodbye
   end
@@ -63,5 +62,3 @@ class CLI
     puts "Thank you for visiting. Goodbye!".colorize(:red)
   end
 end
-
-
