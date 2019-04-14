@@ -10,9 +10,6 @@ class Scraper
       event_detail = tournament.css("td").map { |detail| detail.text}
       Tournament.new(
         event_detail[0], #event
-        event_detail[1], #location
-        event_detail[4], #date
-        event_detail[5], #format
         event_detail[7].strip.to_i, #player_count
         link
       )
