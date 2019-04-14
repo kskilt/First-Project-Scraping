@@ -3,7 +3,9 @@
 # Handles talking to user, with puts and gets. Does not scrape.
 class CLI
   attr_accessor :input, :tournament
+
   def call
+    Scraper.tournament_scraper("https://listfortress.com/")
     greeting
     menu
   end
@@ -17,32 +19,27 @@ class CLI
     list
     puts "Please enter a tournment number to see the players in that specific tournament.".colorize(:red)
     input = gets.strip.downcase
-    @tournament = tournament_by_id(input)
-    @tournament
-
-    display_players
-
+    navigate_tournament(input)
   end
 
-  def list
-    Scraper.tournament_scraper("https://listfortress.com/")
+   def list
     Tournament.all.each do |tourny|
       puts "#{tourny.id}: #{tourny.event} with #{tourny.player_count} players".colorize(:light_blue)
       puts "---------------------".colorize(:blue)
     end
   end
 
-  def validate_tournament(input)
-    if input.is_a Integer
-      @tournament = tournament_by_id(input)
-      @tournament
-    elsif input == "exit"
+  def navigate_tournament(input)
+    if input == "goodbye"
       goodbye
     else
-      puts "That was not a validate option. Please type the corresponding number with the tournament you would like to see"
-      list
+      @tournament = tournament_by_id(input)
+      @tournament
+      display_players
+      command_prompt
     end
   end
+
   def tournament_by_id(input)
     Tournament.find_by_id(input)
   end
@@ -59,18 +56,37 @@ class CLI
              puts"---------------------".colorize(:blue)
         end}
     end
+    command_prompt
+  end
+
+  def command_prompt
+    puts "Enter 'return' to return to the menu or 'goodbye' to end your session.".colorize(:red)
+    user_command
+  end
+
+  def user_command
+    command = gets.strip.downcase
+    case command
+    when 'return'
+      return_to_menu
+    when 'goodbye'
+      goodbye
+    else
+      invalid
+    end
   end
 
   def goodbye
-    "Thank you for visiting. Goodbye!"
+    puts "Thank you for visiting. Goodbye!".colorize(:red)
   end
-# should make recursive so directs user back to the main menu or to exit
 
+  def return_to_menu
+    menu
+  end
+
+  def invalid
+    puts "Please enter a valid command.".colorize(:red)
+  end
 end
 
-      # Scraper.tournament_scraper("https://listfortress.com/")
-    # What do you select
-    # take user input, and use it to "find" the right instance of tournament
-    # pass that to the method below
-    # Scraper.player_scraper(Tournament.all.first)
 
