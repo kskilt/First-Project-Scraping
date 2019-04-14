@@ -14,8 +14,7 @@ class CLI
     @tournament = tournament_by_id(input)
     @tournament
 
-    Scraper.player_scraper(tournament.link)
-    display_player
+    display_players
 
   end
 
@@ -31,40 +30,22 @@ class CLI
     Tournament.find_by_id(input)
   end
 
-  def display_player
-    Scraper.player_scraper(tournament.link)
-    Player.all.each do |players|
-      puts "#{players.name} placed #{players.rank} with a score of #{players.score} running this squad:".colorize(:green)
-        players.squadlist.each do |pilot|
+  def display_players
+    Scraper.player_scraper(tournament)
+    Player.all.each do |player| #Tournament.players.each
+      puts "#{player.name} placed #{player.rank} with a score of #{player.score} running this squad:".colorize(:green)
+      player.squadlist.each { |pilot|
+        if player.squadlist !=nil
         puts "#{pilot}".colorize(:light_blue)
         puts "---------------------".colorize(:blue)
-      end
+        else puts "<This infomation is not available>".colorize(:light_blue)
+             puts"---------------------".colorize(:blue)
+        end}
     end
   end
 # should make recursive so directs user back to the main menu or to exit
 
-
-
-
 end
-
-
-    # if input == 'filter'
-    #   filtered_list(filter)
-    # elsif input.is_a? Integer
-    #   selected_tournament
-    # end
-
-
-      # def filtered_list(filter)
-  #   Scraper.tournament_scraper("https://listfortress.com/")
-  #   Tournament.all.each do |tournament|
-  #       if tournament.filter == filter
-  #         puts "#{tournament.id}: #{tournament.event}".colorize(:light_blue)
-  #         puts "---------------------".colorize(:blue)
-  #       end
-  #   end
-  # end
 
       # Scraper.tournament_scraper("https://listfortress.com/")
     # What do you select
@@ -72,4 +53,3 @@ end
     # pass that to the method below
     # Scraper.player_scraper(Tournament.all.first)
 
-        # puts "Please enter a tournment number to see the players in that tournament, or type 'filter' to refine the list by date, number of players, or format".colorize(:red)

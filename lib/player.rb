@@ -1,14 +1,15 @@
 # frozen_string_literal: true.
 
 class Player
-  attr_reader :rank, :name, :score, :squadlist
+  attr_reader :rank, :name, :score, :squadlist, :tournament
   @@all = []
 
 
-  def initialize(rank, name, score, squadlist)
+  def initialize(rank, name, score, squadlist, tournament)
     @rank = rank
     @name = name
     @score = score
+    @tournament = tournament
     @squadlist = squadify(squadlist)
     @@all << self
   end
@@ -23,5 +24,4 @@ class Player
     end
   end
 
-  # binding.pry
 end
