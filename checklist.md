@@ -17,4 +17,4 @@ Confirm:
 README.md contains:
 
  [x]A short description
- []Installation & execution instructions
+ [x]Installation & execution instructions
