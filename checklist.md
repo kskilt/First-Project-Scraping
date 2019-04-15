@@ -10,17 +10,11 @@ Confirm:
  [x]Application uses Ruby Objects to communicate (and not global methods)
  []The application is generally DRY
  [x]You have committed often
- []Conforms to Nitro Ruby linting rules (Run rubocop on your project root directory and confirm it exits without any offenses detected.)
- []Your commit messages are meaningful
- []You made the changes in a commit that relate to the commit message
- []You have committed frequently
+ [x]Conforms to Nitro Ruby linting rules (Run rubocop on your project root directory and confirm it exits without any offenses detected.)
+ [x]Your commit messages are meaningful
+ [x]You made the changes in a commit that relate to the commit message
+ [x]You have committed frequently
 README.md contains:
 
- []A short description
+ [x]A short description
  []Installation & execution instructions
-
-Bugs and Ideas
-[] recursive interface that goes back to main list or exits as directed
-  [] return button for list
-  [] exit option at any point
-[] Squad lists not inputted online are giving blank data in CLI
