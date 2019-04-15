@@ -1,17 +1,14 @@
 # frozen_string_literal: true
 
 class Tournament
-  attr_reader :event, :player_count, :link, :id
+  attr_reader :event, :player_count, :link
   @@all = []
-  @@id = 1
 
   def initialize(event, player_count, link)
     @event = event
     @player_count = player_count
-    @id = @@id
     @link = link
     @@all << self
-    @@id += 1
   end
 
   def self.all
@@ -23,8 +20,6 @@ class Tournament
   end
 
   def self.find_by_id(id)
-    all.find do |tournament|
-      tournament.id == id.to_i
-    end
+    all[id-1]
   end
 end

@@ -18,13 +18,14 @@ class CLI
     list
     puts "Please enter a tournment number to see a specific tournament.".colorize(:red)
     puts " You may also type 'goodbye' to exit the session".colorize(:red)
-    input = gets.strip.downcase
+    input = gets.strip.downcase.to_i
     navigate_tournament(input)
   end
 
   def list
-    Tournament.all.each do |tourny|
-      puts "#{tourny.id}: #{tourny.event} with #{tourny.player_count} players".colorize(:light_blue)
+    Tournament.all.each_with_index do |tourny, index|
+      id = index + 1
+      puts "#{id}: #{tourny.event} with #{tourny.player_count} players".colorize(:light_blue)
       puts "---------------------".colorize(:blue)
     end
   end
