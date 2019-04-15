@@ -1,8 +1,7 @@
 # frozen_string_literal: true
 
 class CLI
-  attr_accessor :input, :tournament
-
+  attr_accessor :input, :tournament, :url
   def call
     @tournaments = Scraper.tournament_scraper("https://listfortress.com/")
     greeting

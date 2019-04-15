@@ -2,11 +2,10 @@
 
 # This class handles scraping, and not puts, but it will create other objects
 class Scraper
-  LINK = "https://listfortress.com"
   def self.tournament_scraper(url)
     index_page = Nokogiri::HTML(open(url))
     index_page.css("tbody").css("tr").map do |tournament|
-      link = LINK + tournament.css("a").first["href"]
+      link = url + tournament.css("a").first["href"]
       event_detail = tournament.css("td").map(&:text)
       Tournament.new(event_detail[0], event_detail[7].strip.to_i, link)
     end
