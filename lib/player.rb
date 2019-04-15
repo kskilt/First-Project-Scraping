@@ -4,7 +4,6 @@ class Player
   attr_reader :rank, :name, :score, :squadlist, :tournament
   @@all = []
 
-
   def initialize(rank, name, score, squadlist, tournament)
     @rank = rank
     @name = name
@@ -19,8 +18,6 @@ class Player
   end
 
   def formatting(squadlist)
-    unless squadlist.nil?
-      squadlist.strip.split("\n").map { |squad| squad.strip }
-    end
+    squadlist.strip.split("\n").map(&:strip) unless squadlist.nil?
   end
 end
