@@ -14,13 +14,13 @@ class Scraper
 
   def self.player_scraper(tournament)
     player_scraper = Nokogiri::HTML(open(tournament.link)).css("table").css("tr")
-    player_scraper.each do |player|
+    player_scraper.map do |player|
       detail = player.css("td").map(&:text)
       next if detail[0].nil?
 
       unless detail[3].include?("Edit")
         Player.new(detail[0], detail[2], detail[3], detail[6], tournament)
       end
-    end
+    end.compact
   end
 end

@@ -13,4 +13,7 @@ class Tournament
     @link
   end
 
+  def players
+    @players ||= Scraper.player_scraper(self)
+  end
 end

@@ -45,8 +45,7 @@ class CLI
   end
 
   def display_players
-    Scraper.player_scraper(tournament)
-    Player.all.each do |player|
+    tournament.players.each do |player|
       next if player.nil?
 
       puts "#{player.name} placed #{player.rank} with a score of #{player.score}".colorize(:green)
