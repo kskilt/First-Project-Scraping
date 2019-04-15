@@ -4,7 +4,7 @@ class CLI
   attr_accessor :input, :tournament
 
   def call
-    Scraper.tournament_scraper("https://listfortress.com/")
+    @tournaments = Scraper.tournament_scraper("https://listfortress.com/")
     greeting
     menu
   end
@@ -23,7 +23,7 @@ class CLI
   end
 
   def list
-    Tournament.all.each_with_index do |tourny, index|
+    @tournaments.each_with_index do |tourny, index|
       id = index + 1
       puts "#{id}: #{tourny.event} with #{tourny.player_count} players".colorize(:light_blue)
       puts "---------------------".colorize(:blue)
@@ -40,8 +40,8 @@ class CLI
     end
   end
 
-  def tournament_by_id(input)
-    Tournament.find_by_id(input)
+  def tournament_by_id(id)
+    @tournaments[id-1]
   end
 
   def display_players
