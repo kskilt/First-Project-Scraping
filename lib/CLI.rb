@@ -6,7 +6,10 @@ class CLI
   def call
     @tournaments = Scraper.tournament_scraper("https://listfortress.com/")
     greeting
-    menu
+    catch(:goodbye) do
+      menu
+    end
+    exit
   end
 
   def greeting
@@ -16,9 +19,14 @@ class CLI
   def menu
     puts "Here are the latest X-Wing tournaments around the world:".colorize(:red)
     list
-    puts "Please enter a tournment number to see a specific tournament.".colorize(:red)
+    puts "Please enter a tournment number to see a specific tournament (1-25).".colorize(:red)
     puts " You may also type 'goodbye' to exit the session".colorize(:red)
-    input = gets.strip.downcase.to_i
+    input = gets.strip.downcase
+    if input == 'goodbye'
+      goodbye
+    else
+      input = input.to_i
+    end
     navigate_tournament(input)
   end
 
@@ -31,12 +39,12 @@ class CLI
   end
 
   def navigate_tournament(input)
-    if input == "goodbye"
-      goodbye
-    else
+    if input >= 1 && input <= 25
       @tournament = tournament_by_id(input)
       tournament
       display_players
+    else
+      invalid
     end
   end
 
@@ -55,10 +63,37 @@ class CLI
         puts "---------------------".colorize(:blue)
       end
     end
-    goodbye
+    command_prompt
+  end
+
+   def command_prompt
+    puts "Enter 'return' to return to the menu or 'goodbye' to exit the session.".colorize(:red)
+    user_command
+  end
+
+   def user_command
+    command = gets.strip.downcase
+    case command
+    when 'return'
+      return_to_menu
+    when 'goodbye'
+      goodbye
+    else
+      invalid
+    end
+  end
+
+   def return_to_menu
+    menu
+  end
+
+   def invalid
+    puts "Please enter a valid command.".colorize(:red)
+    menu
   end
 
   def goodbye
     puts "Thank you for visiting. Goodbye!".colorize(:red)
+    throw :goodbye
   end
 end
