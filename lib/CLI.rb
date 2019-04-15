@@ -22,7 +22,7 @@ class CLI
     puts "Please enter a tournment number to see a specific tournament (1-25).".colorize(:red)
     puts " You may also type 'goodbye' to exit the session".colorize(:red)
     input = gets.strip.downcase
-    if input == 'goodbye'
+    if input == "goodbye"
       goodbye
     else
       input = input.to_i
@@ -49,7 +49,7 @@ class CLI
   end
 
   def tournament_by_id(id)
-    @tournaments[id-1]
+    @tournaments[id - 1]
   end
 
   def display_players
@@ -66,28 +66,28 @@ class CLI
     command_prompt
   end
 
-   def command_prompt
+  def command_prompt
     puts "Enter 'return' to return to the menu or 'goodbye' to exit the session.".colorize(:red)
     user_command
   end
 
-   def user_command
+  def user_command
     command = gets.strip.downcase
     case command
-    when 'return'
+    when "return"
       return_to_menu
-    when 'goodbye'
+    when "goodbye"
       goodbye
     else
       invalid
     end
   end
 
-   def return_to_menu
+  def return_to_menu
     menu
   end
 
-   def invalid
+  def invalid
     puts "Please enter a valid command.".colorize(:red)
     menu
   end
